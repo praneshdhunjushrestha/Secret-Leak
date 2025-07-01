@@ -5,11 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "secret-leak"
 version = "0.1.0"
-description = "Secret-Leak package"
-authors = [{ name = "Pranesh Dh. Shrestha", email = "you@example.com" }]
+description = "A placeholder package for testing"
+authors = [{ name = "Pranesh Shrestha", email = "your@email.com" }]
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.7"
 dependencies = []
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.setuptools]
+packages = ["secret_leak"]
+package-dir = {"" = "src"}
