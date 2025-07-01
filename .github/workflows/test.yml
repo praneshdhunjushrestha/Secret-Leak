@@ -1,0 +1,28 @@
+name: Test Secret-Leak Install
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencie
+      run: |
+        pip install --upgrade pip
+        pip install git+https://github.com/praneshdhunjushrestha/Secret-Leak.git
+
+
+
