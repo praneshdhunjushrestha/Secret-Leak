@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secret-leak"
+version = "0.1.0"
+description = "Your custom secret detection module"
+authors = [
+    {name = "Pranesh Shrestha", email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = []
